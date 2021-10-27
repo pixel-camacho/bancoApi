@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers\API;
-
 use App\Models\ClienteModel;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -48,11 +47,12 @@ class Clientes extends ResourceController
             
             return $this->respond($cliente);
             
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
                 return $this->failServerError('Ha ocurrido un problema en el servidor');
         }
     }
 
+    
     private function verifiClient($id = null){
         try {
 
@@ -66,10 +66,9 @@ class Clientes extends ResourceController
             
             return true;
             
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
                 return $this->failServerError('Ha ocurrido un problema en el servidor');
         }
-
     }
 
     public function updateClient($id = null)
@@ -91,7 +90,7 @@ class Clientes extends ResourceController
             return $this->failValidationError($this->model->validation->listErrors());
         endif; 
            
-       } catch (\Throwable $th) {
+       } catch (\Exception $e) {
                 return $this->failServerError('Ha ocurrido un problema en el servidor');
        }
     }
@@ -112,7 +111,7 @@ class Clientes extends ResourceController
                 return $this->failServerError('No se ha podido eliminar el registro');
             endif;
 
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             return $this->failServerError('Ha ocurrido un problema en el servidor');
         }    
     }

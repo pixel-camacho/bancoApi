@@ -37,13 +37,17 @@ $routes->get('/', 'Home::index');
 
 //http://localhost:8080/api/
 $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes){
+
     $routes->get('clientes','Clientes::index');
     $routes->post('clientes/create','Clientes::createClient');
-
     $routes->get('clientes/getClientById/(:num)', 'Clientes::getClientById/$1');
     $routes->put('clientes/update/(:num)', 'Clientes::updateClient/$1');
-
     $routes->delete('clientes/delete/(:num)', 'Clientes::deleteClient/$1');
+
+    $routes->get('cuentas', 'Cuenta::index');
+    $routes->post('cuentas/create','Cuenta::create');
+    $routes->put('cuentas/update/(:num)','Cuenta::update/$1');
+    $routes->delete('cuentas/delete/(:num)','Cuenta::delete/$1');
 });
 
 /*
