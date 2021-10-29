@@ -45,9 +45,19 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->delete('clientes/delete/(:num)', 'Clientes::deleteClient/$1');
 
     $routes->get('cuentas', 'Cuenta::index');
-    $routes->post('cuentas/create','Cuenta::create');
-    $routes->put('cuentas/update/(:num)','Cuenta::update/$1');
-    $routes->delete('cuentas/delete/(:num)','Cuenta::delete/$1');
+    $routes->post('cuenta/create','Cuenta::create');
+    $routes->put('cuenta/update/(:num)','Cuenta::update/$1');
+    $routes->delete('cuenta/delete/(:num)','Cuenta::delete/$1');
+
+    $routes->get('transacciones', 'Transaccion::index');
+    $routes->post('transacciones/create', 'Transaccion::create');
+    $routes->put('transacciones/update/(:num)', 'Transaccion::update/$1');
+    $routes->delete('transacciones/delete/(:num)', 'Transaccion::delete/$1');
+
+    $routes->get('tipoTransacciones', 'TiposTransaccion::index');
+    $routes->post('tipoTransacciones/create','TiposTransaccion::create');
+    $routes->put('tipoTransacciones/update/(:num)','TiposTransaccion::update/$1');
+    $routes->delete('tipoTransacciones/delete/(:num)','TiposTransaccion::delete/$1');
 });
 
 /*

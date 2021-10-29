@@ -1,37 +1,37 @@
 <?php
 
 namespace App\Controllers\API;
-use App\Models\CuentasModel;
+
+use App\Models\TipoTransaccioneModel;
 use CodeIgniter\RESTful\ResourceController;
 
-class Cuenta extends ResourceController
+class TiposTransaccion extends ResourceController
 {
 
-    public function __construct()
+    public function  __construct()
     {
-      $this->model = $this->setModel(new CuentasModel());
+        $this->model = $this->setModel(new TipoTransaccioneModel());
     }
-  
+
     public function index()
     {
-       $cuentas = $this->model->findAll();
-       return $this->respond($cuentas);
+        $tiposTransaccion = $this->model->findAll();
+        return $this->respond($tiposTransaccion);
     }
 
     public function create()
     {
         try {
-            $cuenta = $this->request->getJSON();
+            $tipoTransaccion = $this->request->getJSON();
 
-            if($this->model->insert($cuenta)):
-                $cuenta->id = $this->model->insertID();
-                return $this->respondCreated($cuenta);
+            if($this->model->insert($tipoTransaccion)):
+                $tipoTransaccion->id = $this->model->insertID();
+                return $this->respond($tipoTransaccion);
             else:
                 return $this->failValidationError($this->model->validation->listErrors());
             endif;
-
         } catch (\Exception $e) {
-            return $this->failServerError('Ha ocurrido un error en el servidor');
+            return $this->failServerError('Ha ocurrido un problema en el servidor');
         }
     }
 
@@ -58,16 +58,16 @@ class Cuenta extends ResourceController
     {
         try {
 
-            $cuentaVerificada = $this->verifiAccount($id);
+            $tipoTransaccionVerificada = $this->verifiAccount($id);
 
-            if($cuentaVerificada !== true)
-                 return $cuentaVerificada;
+            if($tipoTransaccionVerificada !== true)
+                 return $tipoTransaccionVerificada;
             
-                 $cuenta = $this->request->getJSON();   
+                 $tipoTransaccion = $this->request->getJSON();   
 
-            if($this->model->update($cuenta)):
-                $cuenta->id = $id;
-                return  $this->respondUpdated($cuenta);
+            if($this->model->update($tipoTransaccion)):
+                $tipoTransaccion->id = $id;
+                return  $this->respondUpdated($tipoTransaccion);
             else:
                 return $this->failValidationError($this->model->validation->listErrors());
             endif;
@@ -80,10 +80,10 @@ class Cuenta extends ResourceController
     public function delete($id = null)
     {
         try {
-            $verificarCuenta = $this->verifiAccount($id);
+            $tipoTransaccionVerificada = $this->verifiAccount($id);
 
-            if($verificarCuenta !== true)
-              return $verificarCuenta;
+            if($tipoTransaccionVerificada !== true)
+              return $tipoTransaccionVerificada;
 
             if($this->model->delete($id)):
                 return $this->respondDeleted('Registro con el identificador '.$id.' Eliminado');
@@ -95,5 +95,5 @@ class Cuenta extends ResourceController
             return $this->failServerError('Ha ocurrido un problema en el servidor');
         }
     }
-    
+
 }

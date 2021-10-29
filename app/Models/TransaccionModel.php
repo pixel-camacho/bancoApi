@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TransaccioneModel extends Model
+class TransaccionModel extends Model
 {
-  
+
     protected $table                = 'transaccion';
     protected $primaryKey           = 'id';
 
@@ -21,17 +21,21 @@ class TransaccioneModel extends Model
     protected $createdField         = 'created_at';
     protected $updatedField         = 'updated_at';
 
-
     // Validation
     protected $validationRules      = [
-        'cuenta_id' => 'required|integer',
-        'tipo_trasaccion_id' => 'required|integer',
-        'monto' => 'required|numeric'
+        'monto' => 'required|numeric',
+        'cuenta_id' => 'required|integer|is_valid_cuenta',
+        'tipo_transaccion_id' => 'required|integer|is_valid_type_transaccion'
     ];
-    
-    protected $validationMessages   = [];   
+    protected $validationMessages   = [
+        'cuenta_id' =>[
+            'is_valid_cuenta' => 'Estimado usuario, debe ingresar una cuenta valida'
+        ],
+        'tipo_transaccion_id' =>[
+            'is_valid_type_transaccion' => 'Estimado usuario, debe ingresar un tipo de transaccion valido'
+        ]
+    ];
     protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
 
     // Callbacks
     protected $allowCallbacks       = true;

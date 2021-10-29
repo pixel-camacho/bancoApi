@@ -4,34 +4,31 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TransaccioneModel extends Model
+class TipoTransaccioneModel extends Model
 {
-  
-    protected $table                = 'transaccion';
+
+    protected $table                = 'tipo_transaccion';
     protected $primaryKey           = 'id';
 
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
 
     protected $returnType           = 'array';
-    protected $allowedFields        = ['cuenta_id','tipo_transaccion_id','monto'];
+    protected $allowedFields        = ['descripcion'];
 
     // Dates
     protected $useTimestamps        = true;
     protected $createdField         = 'created_at';
     protected $updatedField         = 'updated_at';
 
-
     // Validation
     protected $validationRules      = [
-        'cuenta_id' => 'required|integer',
-        'tipo_trasaccion_id' => 'required|integer',
-        'monto' => 'required|numeric'
+        'descripcion' => 'required|alpha_space|min_length[5]|max_length[25]'
     ];
-    
-    protected $validationMessages   = [];   
+
+    protected $validationMessages   = [];
     protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
+
 
     // Callbacks
     protected $allowCallbacks       = true;
